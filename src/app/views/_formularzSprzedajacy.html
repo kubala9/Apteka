@@ -1,0 +1,46 @@
+<md-dialog aria-label="List dialog">
+    <md-dialog-content>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 ng-show="!sprzedawca.id">Dodaj nowego pracownika</h2>
+                <h2 ng-show="sprzedawca.id">Edytuj pracownika</h2>
+            </div>
+        </md-toolbar>
+
+        <form>
+        <md-content layout-gt-sm="row" layout-padding>
+            <div>
+                <md-input-container>
+                    <label>Imię</label>
+                    <input ng-model="sprzedawca.imie" type="text" required />
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Nazwisko</label>
+                    <input ng-model="sprzedawca.nazwisko" type="text" required />
+                </md-input-container>
+            </div>
+            <div>
+                <md-input-container>
+                    <label>PESEL</label>
+                    <input ng-model="sprzedawca.pesel" type="text" required />
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Hasło</label>
+                    <input ng-model="sprzedawca.haslo" type="password" required />
+                </md-input-container>
+            </div>
+        </md-content>
+        </form>
+    </md-dialog-content>
+
+    <md-dialog-actions>
+        <md-button ng-click="closeDialog()" class="md-primary md-default-theme">
+            Zamknij
+        </md-button>
+        <md-button ng-click="save()" class="md-primary">
+            Zapisz
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

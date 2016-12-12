@@ -1,20 +1,36 @@
 import angular from 'angular';
 
-import {techsModule} from './app/techs/index';
 import 'angular-ui-router';
+import 'angular-aria';
+import 'angular-animate';
+import 'angular-material';
+import 'angular-material/angular-material.css';
+import 'angular-material-icons';
+
 import routesConfig from './routes';
 
-import {main} from './app/main';
-import {header} from './app/header';
-import {title} from './app/title';
-import {footer} from './app/footer';
+import {main} from './app/layout/main';
+import {header} from './app/layout/header';
+import {menu} from './app/layout/menu';
+import {footer} from './app/layout/footer';
 
 import './index.scss';
 
+import {home} from './app/controllers/Home';
+
+import {obslugasprzedajacy} from './app/controllers/ObslugaSprzedajacy';
+import Sprzedajacy from './app/services/Sprzedajacy';
+
+
 angular
-  .module('app', [techsModule, 'ui.router'])
+  .module('apteka', ['ui.router', 'ngMaterial', 'ngMdIcons'])
   .config(routesConfig)
-  .component('app', main)
-  .component('fountainHeader', header)
-  .component('fountainTitle', title)
-  .component('fountainFooter', footer);
+  .component('apteka', main)
+  .component('aptekaHeader', header)
+  .component('aptekaMenu', menu)
+  .component('aptekaFooter', footer)
+
+    .component('home', home)
+
+    .component('obslugaSprzedajacy', obslugasprzedajacy)
+    .service('Sprzedajacy', Sprzedajacy);

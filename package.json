@@ -22,6 +22,10 @@
   "homepage": "https://github.com/kubala9/Apteka#readme",
   "dependencies": {
     "angular": "^1.5.0",
+    "angular-animate": "^1.5.9",
+    "angular-aria": "^1.5.9",
+    "angular-material": "^1.1.1",
+    "angular-material-icons": "^0.7.1",
     "angular-ui-router": "1.0.0-beta.1"
   },
   "devDependencies": {

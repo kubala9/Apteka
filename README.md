@@ -8,3 +8,10 @@
 * uruchamiamy aplikację przez gulp serve
 * aplikację mamy uruchomioną pod http://localhost:3000
 * terminal z taskiem gulpowym musi być ciągle otwarty (automatycznie odświeża zmieniające się style, skrypty i widoki)
+
+
+##Technologia:
+* http://yeoman.io/
+* http://fountainjs.io/
+* https://angularjs.org/
+* https://klarsys.github.io/angular-material-icons/

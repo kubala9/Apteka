@@ -1,0 +1,27 @@
+
+    <h2>
+        <span>Obsługa sprzedających</span>
+    </h2>
+
+
+<md-content>
+
+    <md-list>
+        <md-list-item ng-repeat="sprzedawca in $ctrl.sprzedawcy" class="noright" ng-click="$ctrl.edytuj(sprzedawca)">
+            <p>{{ sprzedawca.id }} {{ sprzedawca.imie }} {{ sprzedawca.nazwisko }}</p>
+
+            <a class="md-secondary" ng-click="$ctrl.edytuj(sprzedawca)">
+                <ng-md-icon  icon="mode_edit" style="fill: grey;" size="30"></ng-md-icon>
+            </a>
+
+            <a class="md-secondary" ng-click="$ctrl.usun(sprzedawca)">
+                <ng-md-icon icon="delete" style="fill: grey;" size="30"></ng-md-icon>
+            </a>
+        </md-list-item>
+    </md-list>
+
+    <md-button class="md-raised md-primary" ng-click="$ctrl.dodaj()">
+        Dodaj nowego pracownika
+    </md-button>
+
+</md-content>
