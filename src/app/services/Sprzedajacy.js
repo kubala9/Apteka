@@ -1,52 +1,78 @@
+import angular from 'angular';
+
 class Sprzedajacy {
-    constructor() {
+    constructor($localStorage) {
         "ngInject";
 
         this.lista = [];
 
-        let sprzedawca = {
-            'id': 0,
+        this.wczytaj = function wczytaj() {
+            if (angular.isDefined($localStorage.sprzedajacy)) {
+                this.lista = $localStorage.sprzedajacy;
+            }
+        };
+
+        this.zapisz = function zapisz() {
+            if (angular.isArray(this.lista)) {
+                $localStorage.sprzedajacy = this.lista;
+            }
+        };
+
+        this.wczytaj();
+
+        //@TODO defaultowe dane do firstRun
+        /*let sprzedawca = {
+            'id': 1,
             'imie': 'Damian',
             'nazwisko': 'Lewita',
             'pesel': '95081604551',
             'haslo': 'mojehasło'
         };
         this.lista.push(sprzedawca);
+        this.zapisz();*/
     }
+
+
 
     nowy(sprzedawca) {
         if (this.lista.length === 0) {
-            sprzedawca.id = 0;
+            sprzedawca.id = 1;
         } else {
             sprzedawca.id = this.lista[this.lista.length - 1].id + 1;
         }
 
         this.lista.push(sprzedawca);
+        this.zapisz();
+
         return true;
     }
 
-    //wyciągnij sprzedających
     pobierz() {
         return this.lista;
     }
 
     edytuj(sprzedawca) {
-        var index = this.lista.indexOf(sprzedawca);
-        if (index === -1) {
+        var i = this.lista.findIndex((element, index, array) => element.id === sprzedawca.id);
+
+        if (i === -1) {
             return false;
         }
 
-        this.lista[index] = sprzedawca;
+        this.lista[i] = sprzedawca;
+        this.zapisz();
+
         return true;
     }
 
     usun(sprzedawca) {
-        var index = this.lista.indexOf(sprzedawca);
-        if (index === -1) {
+        var i = this.lista.indexOf(sprzedawca);
+        if (i === -1) {
             return false;
         }
 
-        this.lista.splice(index, 1);
+        this.lista.splice(i, 1);
+        this.zapisz();
+
         return true;
     }
 }

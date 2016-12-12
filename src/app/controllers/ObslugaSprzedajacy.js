@@ -6,62 +6,57 @@ class ObslugaSprzedajacy {
   constructor($scope, $mdDialog, Sprzedajacy) {
     this.sprzedawcy = Sprzedajacy.pobierz();
 
-    //dodawanie pracowników
+    //dodawanie/edytowanie pracowników
     let zapisano = sprzedawca => {
       return $mdDialog.alert()
           .title('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' został zapisany!')
           .ok('Rozumiem, dzięki');
     };
-    let dodawanie = ($scope, $mdDialog, sprzedawca) => {
-      $scope.sprzedawca = sprzedawca;
+    let niezapisano = sprzedawca => {
+      return $mdDialog.alert()
+          .title('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' nie został zapisany!')
+          .ok('Rozumiem, dzięki');
+    };
+    let modyfikowanie = ($scope, $mdDialog, sprzedawca) => {
+      if (typeof sprzedawca !== "undefined") {
+        $scope.sprzedawca = Object.assign({}, sprzedawca);
+        $scope.sprzedawca.haslo = '';
+      } else {
+        $scope.sprzedawca = {
+          'imie': '',
+          'nazwisko': '',
+          'pesel': '',
+          'haslo': ''
+        };
+      }
 
       $scope.closeDialog = () => {
         $mdDialog.hide();
       };
 
       $scope.save = () => {
-        if (Sprzedajacy.nowy(sprzedawca)) {
-          $mdDialog.show(zapisano(sprzedawca));
+        sprzedawca = $scope.sprzedawca;
+
+        if (sprzedawca.id) {
+          if (Sprzedajacy.edytuj(sprzedawca)) {
+            $mdDialog.show(zapisano(sprzedawca));
+          } else {
+            $mdDialog.show(niezapisano(sprzedawca));
+          }
+        } else {
+          if (Sprzedajacy.nowy(sprzedawca)) {
+            $mdDialog.show(zapisano(sprzedawca));
+          } else {
+            $mdDialog.show(niezapisano(sprzedawca));
+          }
         }
       };
     };
-    this.dodaj = function dodaj() {
-      var sprzedawca = {
-        'imie': '',
-        'nazwisko': '',
-        'pesel': '',
-        'haslo': ''
-      };
-
+    this.modyfikacja = function modyfikacja(sprzedawca) {
       $mdDialog.show({
         template: formularz,
-        locals: {sprzedawca},
-        controller: dodawanie
-      });
-    };
-
-    //edytowanie pracowników
-    let edytowanie = ($scope, $mdDialog, sprzedawca) => {
-      $scope.sprzedawca = Object.assign({}, sprzedawca);
-
-      $scope.closeDialog = () => {
-        $mdDialog.hide();
-      };
-
-      $scope.save = () => {
-        $mdDialog.hide();
-
-        if (Sprzedajacy.edytuj(sprzedawca)) {
-          $mdDialog.show(zapisano(sprzedawca));
-          sprzedawca = $scope.sprzedawca;
-        }
-      };
-    };
-    this.edytuj = function edytuj(sprzedawca) {
-      $mdDialog.show({
-        template: formularz,
-        locals: {sprzedawca},
-        controller: edytowanie
+        locals: {sprzedawca}, //strzykujemy aktualnie dodawanego/edytowanego sprzedawce
+        controller: modyfikowanie
       });
     };
 

@@ -23,7 +23,9 @@ module.exports = {
     'spaced-comment': 0,
     'space-before-function-paren': 0,
     'no-trailing-spaces': 0,
-    'quote-props': 0
+    'quote-props': 0,
+    'space-infix-ops': 0,
+    'no-lonely-if': 0
   }
 }
 

@@ -9,9 +9,17 @@
 * aplikację mamy uruchomioną pod http://localhost:3000
 * terminal z taskiem gulpowym musi być ciągle otwarty (automatycznie odświeża zmieniające się style, skrypty i widoki)
 
+##Do poczytania:
+* Angular material: https://material.angularjs.org/latest/
+* Ikonki: https://klarsys.github.io/angular-material-icons/
+* Funkcje strzałkowe: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+* storage: https://github.com/gsklee/ngStorage
 
 ##Technologia:
 * http://yeoman.io/
 * http://fountainjs.io/
 * https://angularjs.org/
-* https://klarsys.github.io/angular-material-icons/
+
+
+##Tip
+* w edytorze polecam kliknąć prawym klawiszem myszy na folder .tmp, "Mark directory as", "Exclude" (IDE - PHP Storm)

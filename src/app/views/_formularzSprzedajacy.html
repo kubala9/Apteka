@@ -1,4 +1,4 @@
-<md-dialog aria-label="List dialog">
+<md-dialog>
     <md-dialog-content>
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -7,31 +7,54 @@
             </div>
         </md-toolbar>
 
-        <form>
-        <md-content layout-gt-sm="row" layout-padding>
-            <div>
-                <md-input-container>
-                    <label>Imię</label>
-                    <input ng-model="sprzedawca.imie" type="text" required />
-                </md-input-container>
+        <form name="modyfikacjaSprzedajacy">
+            <md-content layout-gt-sm="row" layout-padding>
+                <div>
+                    <md-input-container>
+                        <label>Imię</label>
+                        <input name="imie" ng-model="sprzedawca.imie" type="text" required />
 
-                <md-input-container>
-                    <label>Nazwisko</label>
-                    <input ng-model="sprzedawca.nazwisko" type="text" required />
-                </md-input-container>
-            </div>
-            <div>
-                <md-input-container>
-                    <label>PESEL</label>
-                    <input ng-model="sprzedawca.pesel" type="text" required />
-                </md-input-container>
+                        <div ng-messages="modyfikacjaSprzedajacy.imie.$error" multiple md-auto-hide="true">
+                            <div ng-message="required">
+                                Wpisz imię pracownika!
+                            </div>
+                        </div>
+                    </md-input-container>
 
-                <md-input-container>
-                    <label>Hasło</label>
-                    <input ng-model="sprzedawca.haslo" type="password" required />
-                </md-input-container>
-            </div>
-        </md-content>
+                    <md-input-container>
+                        <label>Nazwisko</label>
+                        <input name="nazwisko" ng-model="sprzedawca.nazwisko" type="text" required />
+
+                        <div ng-messages="modyfikacjaSprzedajacy.nazwisko.$error" multiple md-auto-hide="true">
+                            <div ng-message="required">
+                                Wpisz nazwisko pracownika!
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div>
+                    <md-input-container>
+                        <label>PESEL</label>
+                        <input name="pesel" ng-model="sprzedawca.pesel" type="text" required pattern="[0-9]{11}" />
+                        <div ng-messages="modyfikacjaSprzedajacy.pesel.$error">
+                            <div ng-message-exp="['required', 'pattern']">
+                                Wpisz prawidłowy PESEL!
+                            </div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Hasło</label>
+                        <input name="haslo" ng-model="sprzedawca.haslo" type="password" required minlength="6" />
+
+                        <div ng-messages="modyfikacjaSprzedajacy.haslo.$error" multiple md-auto-hide="true">
+                            <div ng-message-exp="['required', 'minlength']">
+                                Wpisz przynajmniej 6 znaków!
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </md-content>
         </form>
     </md-dialog-content>
 
@@ -39,7 +62,7 @@
         <md-button ng-click="closeDialog()" class="md-primary md-default-theme">
             Zamknij
         </md-button>
-        <md-button ng-click="save()" class="md-primary">
+        <md-button ng-click="save()" class="md-primary" ng-disabled="!modyfikacjaSprzedajacy.$valid">
             Zapisz
         </md-button>
     </md-dialog-actions>

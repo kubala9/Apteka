@@ -6,6 +6,8 @@ import 'angular-animate';
 import 'angular-material';
 import 'angular-material/angular-material.css';
 import 'angular-material-icons';
+import 'angular-messages';
+import 'ngStorage';
 
 import routesConfig from './routes';
 
@@ -23,7 +25,7 @@ import Sprzedajacy from './app/services/Sprzedajacy';
 
 
 angular
-  .module('apteka', ['ui.router', 'ngMaterial', 'ngMdIcons'])
+  .module('apteka', ['ui.router', 'ngMaterial', 'ngMdIcons', 'ngMessages', 'ngStorage'])
   .config(routesConfig)
   .component('apteka', main)
   .component('aptekaHeader', header)
@@ -34,3 +36,5 @@ angular
 
     .component('obslugaSprzedajacy', obslugasprzedajacy)
     .service('Sprzedajacy', Sprzedajacy);
+
+
