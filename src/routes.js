@@ -11,14 +11,19 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       component: 'apteka',
       redirectTo: 'apteka.home'
     })
-      .state('apteka.home', {
-          url: 'home',
-          component: 'home',
-          data: {pageTitle: 'Home'}
-      })
+    .state('apteka.home', {
+        url: 'home',
+        component: 'home',
+        data: {pageTitle: 'Home'}
+    })
     .state('apteka.sprzedajacy', {
       url: 'sprzedający',
       component: 'obslugaSprzedajacy',
       data: {pageTitle: 'Sprzedający'}
+    })
+    .state('apteka.kupujacy', {
+      url: 'kupujący',
+      component: 'obslugaKupujacy',
+      data: {pageTitle: 'Kupujący'}
     });
 }

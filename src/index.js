@@ -23,6 +23,9 @@ import {home} from './app/controllers/Home';
 import {obslugasprzedajacy} from './app/controllers/ObslugaSprzedajacy';
 import Sprzedajacy from './app/services/Sprzedajacy';
 
+import {obslugakupujacy} from './app/controllers/ObslugaKupujacy.js';
+import Kupujacy from './app/services/Kupujacy';
+
 
 angular
   .module('apteka', ['ui.router', 'ngMaterial', 'ngMdIcons', 'ngMessages', 'ngStorage'])
@@ -35,6 +38,10 @@ angular
     .component('home', home)
 
     .component('obslugaSprzedajacy', obslugasprzedajacy)
-    .service('Sprzedajacy', Sprzedajacy);
+    .service('Sprzedajacy', Sprzedajacy)
+
+   .component('obslugaKupujacy', obslugakupujacy)
+   .service('Kupujacy', Kupujacy);
+
 
 
