@@ -25,5 +25,10 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: 'kupujący',
       component: 'obslugaKupujacy',
       data: {pageTitle: 'Kupujący'}
+    })
+    .state('apteka.produkt', {
+      url: 'produkt',
+      component: 'obslugaProduktow',
+      data: {pageTitle: 'Produkt'}
     });
 }

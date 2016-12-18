@@ -30,7 +30,7 @@ class ObslugaKupujacy {
       let zapisano = kupujacy => {
       return $mdDialog.alert()
           .title('Klient ' + kupujacy.imie + ' ' + kupujacy.nazwisko+ ' został zapisany!')
-          .ok('Ok');
+          .ok('Ok!');
       };
 
       $scope.changeValue = function() {

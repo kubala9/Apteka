@@ -1,0 +1,27 @@
+<h2>
+    <span>Baza produktów</span>
+</h2>
+<md-content>
+   <br/><label>Wyszukaj: <input ng-model="searchText" placeholder="Wpisz nazwę produktu..."></label>
+    <md-list>
+        <md-list-item ng-repeat="produkt in $ctrl.produkty | filter:searchText" ng-click="$ctrl.modyfikacja(produkt)">         
+            <div class="md-list-item-text">
+                <h3>{{produkt.nazwa }} </h3>
+                <p>{{produkt.opis}}</p>
+ 
+                <div class="md-secondary " >{{produkt.dostepnosc}}</div>
+            </div>
+            <md-button class="md-secondary md-icon-button" ng-click="$ctrl.modyfikacja(produkt)">
+                <ng-md-icon  icon="mode_edit" style="fill: grey;" size="30"></ng-md-icon>
+            </md-button>
+
+            <md-button class="md-secondary md-icon-button" ng-click="$ctrl.usun(produkt)">
+                <ng-md-icon icon="delete" style="fill: grey;" size="30"></ng-md-icon>
+            </md-button>
+        </md-list-item>
+    </md-list>
+
+    <md-button class="md-raised md-primary" ng-click="$ctrl.modyfikacja()">
+        Dodaj nowy produkt
+    </md-button>
+</md-content>

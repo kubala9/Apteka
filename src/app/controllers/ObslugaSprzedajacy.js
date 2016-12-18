@@ -10,12 +10,12 @@ class ObslugaSprzedajacy {
     let zapisano = sprzedawca => {
       return $mdDialog.alert()
           .title('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' został zapisany!')
-          .ok('Rozumiem, dzięki');
+          .ok('Ok!');
     };
     let niezapisano = sprzedawca => {
       return $mdDialog.alert()
           .title('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' nie został zapisany!')
-          .ok('Rozumiem, dzięki');
+          .ok('Ok!');
     };
     let modyfikowanie = ($scope, $mdDialog, sprzedawca) => {
       if (typeof sprzedawca !== "undefined") {
@@ -64,12 +64,12 @@ class ObslugaSprzedajacy {
     var usunieto = sprzedawca => {
       return $mdDialog.alert()
           .title('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' został usunięty!')
-          .ok('Rozumiem, dzięki');
+          .ok('Ok!');
     };
     let nieusunieto = sprzedawca => {
       return $mdDialog.alert()
           .title('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' nie został usunięty!')
-          .ok('Rozumiem, dzięki');
+          .ok('Ok!');
     };
     let potwierdzUsuniecie = sprzedawca => {
       return $mdDialog.confirm()
