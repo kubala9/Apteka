@@ -3,20 +3,10 @@ import formularz from '../views/_formularzSprzedajacy.html';
 
 class ObslugaSprzedajacy {
 
-  constructor($scope, $mdDialog, Sprzedajacy) {
+  constructor($scope, $mdDialog, Sprzedajacy, Notyfikacje) {
     this.sprzedawcy = Sprzedajacy.pobierz();
 
     //dodawanie/edytowanie pracowników
-    let zapisano = sprzedawca => {
-      return $mdDialog.alert()
-          .title('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' został zapisany!')
-          .ok('Ok!');
-    };
-    let niezapisano = sprzedawca => {
-      return $mdDialog.alert()
-          .title('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' nie został zapisany!')
-          .ok('Ok!');
-    };
     let modyfikowanie = ($scope, $mdDialog, sprzedawca) => {
       if (typeof sprzedawca !== "undefined") {
         $scope.sprzedawca = Object.assign({}, sprzedawca);
@@ -39,15 +29,17 @@ class ObslugaSprzedajacy {
 
         if (sprzedawca.id) {
           if (Sprzedajacy.edytuj(sprzedawca)) {
-            $mdDialog.show(zapisano(sprzedawca));
+            Notyfikacje.zamknij();
+            Notyfikacje.powiadomienie('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' został zapisany!');
           } else {
-            $mdDialog.show(niezapisano(sprzedawca));
+            Notyfikacje.powiadomienie('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' nie został zapisany!');
           }
         } else {
           if (Sprzedajacy.nowy(sprzedawca)) {
-            $mdDialog.show(zapisano(sprzedawca));
+            Notyfikacje.zamknij();
+            Notyfikacje.powiadomienie('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' został dodany!');
           } else {
-            $mdDialog.show(niezapisano(sprzedawca));
+            Notyfikacje.powiadomienie('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' nie został zapisany!');
           }
         }
       };
@@ -61,36 +53,19 @@ class ObslugaSprzedajacy {
     };
 
     //usuwanie pracowników
-    var usunieto = sprzedawca => {
-      return $mdDialog.alert()
-          .title('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' został usunięty!')
-          .ok('Ok!');
-    };
-    let nieusunieto = sprzedawca => {
-      return $mdDialog.alert()
-          .title('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' nie został usunięty!')
-          .ok('Ok!');
-    };
-    let potwierdzUsuniecie = sprzedawca => {
-      return $mdDialog.confirm()
-          .title('Czy chcesz usunąć sprzedawcę ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + '?')
-          .ok('Tak')
-          .cancel('Nie');
-    };
     this.usun = function usun(sprzedawca) {
-      $mdDialog
-          .show(potwierdzUsuniecie(sprzedawca))
+      Notyfikacje.potwierdzenie('Czy chcesz usunąć sprzedawcę ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + '?', 'Tak', 'Nie')
           .then(function() {
             if (Sprzedajacy.usun(sprzedawca)) {
-              $mdDialog.hide();
-              $mdDialog.show(usunieto(sprzedawca));
+              Notyfikacje.zamknij();
+              Notyfikacje.powiadom('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' został usunięty!');
             } else {
-              $mdDialog.hide();
-              $mdDialog.show(nieusunieto(sprzedawca));
+              Notyfikacje.zamknij();
+              Notyfikacje.powiadom('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' nie został usunięty!');
             }
           }, function() {
-            $mdDialog.hide();
-            $mdDialog.show(nieusunieto(sprzedawca));
+            Notyfikacje.zamknij();
+            Notyfikacje.powiadom('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' nie został usunięty!');
           });
     };
   }

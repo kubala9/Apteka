@@ -11,7 +11,8 @@ class Produkt {
                 cena: '', 
                 dostepnosc: '',
                 recepta: '', 
-                refundacja: ''
+                refundacja: '',
+                id: 0
             }
         ];
 

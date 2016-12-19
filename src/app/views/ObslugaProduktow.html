@@ -3,9 +3,11 @@
 </h2>
 <md-content>
    <br/><label>Wyszukaj: <input ng-model="searchText" placeholder="Wpisz nazwę produktu..."></label>
+
     <md-list>
         <md-list-item ng-repeat="produkt in $ctrl.produkty | filter:searchText" ng-click="$ctrl.modyfikacja(produkt)">         
             <div class="md-list-item-text">
+                {{ produkt }}
                 <h3>{{produkt.nazwa }} </h3>
                 <p>{{produkt.opis}}</p>
  
