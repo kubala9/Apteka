@@ -2,10 +2,16 @@
     <span>Baza produktów</span>
 </h2>
 <md-content>
+<<<<<<< HEAD
    <br/><label>Wyszukaj  produkt: <input ng-model="searchText" placeholder="Wpisz nazwę produktu..."></label>
+=======
+   <br/><label>Wyszukaj: <input ng-model="searchText" placeholder="Wpisz nazwę produktu..."></label>
+
+>>>>>>> 83c930aa078e5ef29ff713d3f0f8569597370da4
     <md-list>
         <md-list-item ng-repeat="produkt in $ctrl.produkty | filter:searchText" ng-click="$ctrl.modyfikacja(produkt)">         
             <div class="md-list-item-text">
+                {{ produkt }}
                 <h3>{{produkt.nazwa }} </h3>
                 <p>{{produkt.opis}}</p>
  

@@ -20,6 +20,8 @@ import './index.scss';
 
 import {home} from './app/controllers/Home';
 
+import Notyfikacje from './app/services/Notyfikacje';
+
 import {obslugasprzedajacy} from './app/controllers/ObslugaSprzedajacy';
 import Sprzedajacy from './app/services/Sprzedajacy';
 
@@ -40,6 +42,8 @@ angular
   .component('aptekaHeader', header)
   .component('aptekaMenu', menu)
   .component('aptekaFooter', footer)
+
+    .service('Notyfikacje', Notyfikacje)
 
     .component('home', home)
 
