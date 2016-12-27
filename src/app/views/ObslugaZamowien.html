@@ -1,0 +1,49 @@
+<h2>
+    <span flex>Nowe zamówienie</span>
+</h2>
+ 
+<md-content>
+  <md-button class="md-raised md-primary" ng-click="$ctrl.pokaz()">
+        Koszyk
+    </md-button>
+   <br/><label>Wyszukaj  produkt: <input ng-model="searchText" placeholder="Wpisz nazwę produktu..."></label>
+     <div layout="row">
+         <div flex ><h3><br/>PRODUKT</h3></div>
+         <div flex><h3>&nbsp;</h3></div>
+           <div flex><h3>&nbsp;</h3></div>
+         <div flex><h3>CENA</h3></div>
+         <div flex><h3>REFUND.</h3></div>  
+         <div flex><h3>RECEPTA</h3></div>
+         <div flex><h3>STAN</h3></div>
+           <div flex><h3>&nbsp;</h3></div>
+    </div>
+           <md-list> 
+              
+               <md-list-item ng-repeat="produkt in $ctrl.produkty | filter:searchText" ng-click=""> 
+               <div layout="column" style="width: 38%" >
+                   <div flex><h3>{{produkt.nazwa }}</h3>
+                   <p>{{produkt.opis}}</p>
+                    </div>
+                   </div>
+                   <div layout="column" style="width: 16%" >
+                <div flex>{{produkt.cena+' PLN'}}</div>
+                   </div>
+                <div layout="column" style="width: 10%"  >
+                <div flex>{{produkt.refundacja+' %'}}</div>
+            </div>
+             <div layout="column" style="width: 15%"  >
+                <div flex>{{produkt.recepta}}</div>
+            </div>
+             <div layout="column" style="width: 15%"  >
+                <div flex>{{produkt.stan}}</div>
+            </div>
+            <input ng-model="koszyk.ilosc" placeholder="szt." maxlength="4" style="width: 35px" >
+            <md-button class="md-secondary md-icon-button" ng-click="$ctrl.nowy(zamowienie)">
+                <ng-md-icon icon="add" style="fill: grey;" size="30"></ng-md-icon>
+            </md-button>
+        </md-list-item>
+        
+    </md-list>
+
+   
+</md-content>

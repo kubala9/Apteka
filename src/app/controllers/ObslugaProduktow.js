@@ -23,12 +23,12 @@ class ObslugaProduktow {
         $scope.produkt.haslo = '';
       } else {
         $scope.produkt = {
-                nazwa: '',
+                 nazwa: '',
                 opis: '', 
                 cena: '', 
-                dostepnosc: '',
-                recepta: '', 
-                refundacja: ''
+                stan: 0,
+                recepta: true, 
+                refundacja: true
             };
         }
 

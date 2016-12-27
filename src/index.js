@@ -29,6 +29,9 @@ import Kupujacy from './app/services/Kupujacy';
 import {obslugaproduktow} from './app/controllers/ObslugaProduktow.js';
 import Produkt from './app/services/Produkt';
 
+import {obslugazamowien} from './app/controllers/ObslugaZamowien.js';
+import Zamowienie from './app/services/Zamowienie';
+
 
 angular
   .module('apteka', ['ui.router', 'ngMaterial', 'ngMdIcons', 'ngMessages', 'ngStorage'])
@@ -47,7 +50,10 @@ angular
    .service('Kupujacy', Kupujacy)
 
     .component('obslugaProduktow', obslugaproduktow)
-    .service('Produkt', Produkt);
+    .service('Produkt', Produkt)
+
+    .component('obslugaZamowien', obslugazamowien)
+    .service('Zamowienie', Zamowienie);
 
 
 

@@ -25,7 +25,9 @@ module.exports = {
     'no-trailing-spaces': 0,
     'quote-props': 0,
     'space-infix-ops': 0,
-    'no-lonely-if': 0
+    'no-lonely-if': 0,
+    'key-spacing':0,
+      'comma-spacing':0
   }
 }
 
