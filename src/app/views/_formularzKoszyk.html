@@ -1,0 +1,54 @@
+<md-dialog>    
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Twój koszyk</h2>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>               
+
+    
+             <table style="width: 90%" >
+	<tbody>
+		<tr>
+			<th  style="width: 40%;" >PRODUKT</th>
+			<th  style="width: 15%;" >CENA(1szt.)</th>
+			<th  style="width: 15%;" >ILOŚĆ</th>
+			<th  style="width: 15%;" >SUMA</th>
+		</tr>
+		    	</tbody>
+</table>  
+		<md-list>
+        <md-list-item ng-repeat="pozycja in zamowienie" ng-click="$ctrl.modyfikacja(produkt)">         
+            <div class="md-list-item-text">
+		  <table style="width: 100%;">
+	<tbody>
+		<tr>
+			<td  style="width: 300px;"><h3>{{pozycja.produkt.nazwa }} </h3>
+                </td>
+			<td style="width: 20%;">{{pozycja.produkt.cena}}</td>
+			<td style="width: 13%;">{{pozycja.ilosc }} </td>
+			<td style="width: 13%;">{{pozycja.ilosc * pozycja.produkt.cena}} </td>
+		</tr>
+
+        
+           
+    	</tbody>
+</table>  
+            <md-button class="md-secondary md-icon-button" ng-click="usun()">
+                <ng-md-icon icon="delete" style="fill: grey;" size="30"></ng-md-icon>
+            </md-button>
+                </div>
+        </md-list-item>
+    </md-list>
+
+    </md-dialog-content>
+
+    <md-dialog-actions>
+        <md-button ng-click="closeDialog()" class="md-primary md-default-theme">
+            Zamknij
+        </md-button>
+        <md-button ng-click="#" class="md-primary">
+            Zatwierdź i wyślij
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

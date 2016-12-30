@@ -20,7 +20,6 @@ class ObslugaProduktow {
     let modyfikowanie = ($scope, $mdDialog, produkt) => {
       if (typeof produkt !== "undefined") {
         $scope.produkt = Object.assign({}, produkt);
-        $scope.produkt.haslo = '';
       } else {
         $scope.produkt = {
                  nazwa: '',
@@ -28,7 +27,8 @@ class ObslugaProduktow {
                 cena: '', 
                 stan: 0,
                 recepta: true, 
-                refundacja: true
+                refundacja: 0,
+                dostepnosc: false
             };
         }
 

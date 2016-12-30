@@ -33,10 +33,10 @@
                     </md-input-container>   
                     <md-input-container>
                         <label>Cena</label>
-                        <input name="cena" ng-model="produkt.cena" type="text" required pattern="[0-9]{1,10}(\,)[0-9]{2}" />
+                        <input name="cena" ng-model="produkt.cena" type="text" required pattern="[0-9]{1,10}(\.)[0-9]{2}" />
                         <div ng-messages="modyfikacjaProduktu.cena.$error">
                             <div ng-message-exp="['required', 'pattern']">
-                                Wpisz prawidłową cenę! (z przecinkiem i dwucyfrową liczbą groszy)
+                                Wpisz prawidłową cenę! (z kropka i dwucyfrową liczbą groszy)
                             </div>
                         </div>
                     </md-input-container>
@@ -50,8 +50,17 @@
                             </div>
                         </div>
                     </md-input-container> 
+                     <md-input-container>
+                        <label>Stan</label>
+                        <input name="stan" ng-model="produkt.stan" type="text" required pattern="[0-9]{1,}" />
+                        <div ng-messages="modyfikacjaProduktu.stan.$error">
+                            <div ng-message-exp="['required', 'pattern']">
+                                Wpisz całkowitą liczbę sztuk danego produktu na stanie!
+                            </div>
+                        </div>
+                    </md-input-container> 
                     <md-input-container>
-                        <md-checkbox ng-model="produkt.stan" aria-label="Dostepnosc" ng-true-value="'Dostępny'" ng-false-value="'Chwilowy brak produktu'"
+                        <md-checkbox ng-model="produkt.dostepnosc" aria-label="Dostepnosc" ng-true-value="'Dostępny'" ng-false-value="'Chwilowy brak produktu'"
                          ng-disabled="checked" >
                           Dostępność
                          </md-checkbox>

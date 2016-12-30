@@ -3,7 +3,7 @@ import angular from 'angular';
 class Zamowienie {
     constructor($localStorage, Produkt) { 
         "ngInject";
-        
+        this.produkty = Produkt.pobierz();
         this.koszyk = [];
 
         this.wczytaj = function wczytaj() {
@@ -22,13 +22,7 @@ class Zamowienie {
 
 
 
-    nowy(zamowienie) {
-        if (this.koszyk.length === 0) {
-            this.koszyk.id = 1;
-        } else {
-            this.koszyk.id = this.koszyk[this.koszyk.length - 1].id + 1;
-        }
-
+    dodaj(zamowienie) {    
         this.koszyk.push(zamowienie);
         this.zapisz();
 
@@ -54,10 +48,7 @@ class Zamowienie {
 
     usun(zamowienie) {
         var i = this.koszyk.indexOf(zamowienie);
-        if (i === -1) {
-            return false;
-        }
-
+        console.log("indeks", i);
         this.koszyk.splice(i, 1);
         this.zapisz();
 

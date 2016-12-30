@@ -59,5 +59,3 @@ angular
     .component('obslugaZamowien', obslugazamowien)
     .service('Zamowienie', Zamowienie);
 
-
-
