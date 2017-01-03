@@ -1,0 +1,69 @@
+<md-dialog>
+    <md-dialog-content>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 ng-show="!sprzedaz.id">Dodaj nową sprzedaż</h2>
+                <h2 ng-show="sprzedaz.id">Edytuj sprzedaż nr {{ sprzedaz.id }}</h2>
+            </div>
+        </md-toolbar>
+{{sprzedaz}}
+        <form name="modyfikacjaSprzedazy">
+            <md-content layout="column" layout-padding>
+                <div>
+                    <md-input-container>
+                        <md-checkbox ng-model="sprzedaz.recepta" aria-label="Recepta" ng-true-value="1" ng-false-value="0">
+                            Recepta
+                        </md-checkbox>
+                    </md-input-container>
+                </div>
+
+                <div>
+                    <md-input-container>
+                        <label>Kupujący</label>
+                        <md-select ng-model="sprzedaz.kupujacy">
+                            <md-option ng-repeat="item in kupujacy" ng-value="item.id">
+                                {{ item.imie }} {{ item.nazwisko }}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+                <h2>Lista produktów</h2>
+
+                <div ng-repeat="produkt in sprzedaz.produkty">
+                    <md-input-container>
+                        <label>Produkt {{ $index + 1 }}</label>
+                        <md-select ng-model="produkt.id">
+
+                            <md-option ng-repeat="item in produkty" ng-value="item.id">
+                                {{ item.nazwa }}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Stan</label>
+                        <input name="ilosc" ng-model="produkt.ilosc" type="text" required pattern="[0-9]{1,}" />
+                        <div ng-messages="modyfikacjaSprzedazy.ilosc.$error">
+                            <div ng-message-exp="['required', 'pattern']">
+                                Wpisz całkowitą liczbę sztuk danego produktu na stanie!
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <a ng-click="dodajProdukt()">Dodaj produkt</a>
+
+            </md-content>
+        </form>
+    </md-dialog-content>
+
+    <md-dialog-actions>
+        <md-button ng-click="closeDialog()" class="md-primary md-default-theme">
+            Zamknij
+        </md-button>
+        <md-button ng-click="save()" class="md-primary" ng-disabled="!modyfikacjaSprzedajacy.$valid">
+            Zapisz
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

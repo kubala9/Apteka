@@ -21,7 +21,7 @@ class ObslugaSprzedajacy {
       }
 
       $scope.closeDialog = () => {
-        $mdDialog.hide();
+        Notyfikacje.zamknij();
       };
 
       $scope.save = () => {

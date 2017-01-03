@@ -1,0 +1,22 @@
+<h2>
+    <span>Obsługa Sprzedaży</span>
+</h2>
+<md-content>
+    <md-list>
+        <md-list-item ng-repeat="sprzedaz in $ctrl.sprzedaz" class="noright" ng-click="$ctrl.modyfikacja(sprzedaz)">
+            <p>{{ sprzedaz }}</p>
+
+            <md-button class="md-secondary md-icon-button" ng-click="$ctrl.modyfikacja(sprzedaz)">
+                <ng-md-icon  icon="mode_edit" style="fill: grey;" size="30"></ng-md-icon>
+            </md-button>
+
+            <md-button class="md-secondary md-icon-button" ng-click="$ctrl.usun(sprzedaz)">
+                <ng-md-icon icon="delete" style="fill: grey;" size="30"></ng-md-icon>
+            </md-button>
+        </md-list-item>
+    </md-list>
+
+    <md-button class="md-raised md-primary" ng-click="$ctrl.modyfikacja()">
+        Dodaj nową sprzedaż
+    </md-button>
+</md-content>

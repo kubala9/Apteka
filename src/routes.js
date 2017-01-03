@@ -35,5 +35,9 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: 'zamowienie',
       component: 'obslugaZamowien',
       data: {pageTitle: 'Zamówienie'}
-    });
+    }).state('apteka.sprzedaz', {
+      url: 'sprzedaz',
+      component: 'obslugaSprzedazy',
+      data: {pageTitle: 'Sprzedaż'}
+  });
 }
