@@ -12,8 +12,8 @@ class Notyfikacje {
     powiadomienie(tekst) {
         var toast = this.toast.simple()
             .textContent(tekst)
-            .position('top right')
-            .hideDelay(3000);
+            .position('bottom right')
+            .hideDelay(5000);
 
         return this.toast.show(toast);
     }

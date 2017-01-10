@@ -46,7 +46,7 @@ class ObslugaSprzedazy {
                         Notyfikacje.zamknij();
                         Notyfikacje.powiadomienie('Sprzedaż została dodany!');
                     } else {
-                        Notyfikacje.powiadomienie('Sprzedaż nie została zapisany!');
+                        Notyfikacje.powiadomienie('Sprzedaż nie została zapisana!');
                     }
                 }
             };

@@ -2,7 +2,8 @@ import tpl from '../views/Home.html';
 
 class Home {
   constructor() {
-    this.text = 'siema';
+    "ngInject";
+
   }
 }
 

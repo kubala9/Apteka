@@ -19,17 +19,6 @@ class Sprzedajacy {
         };
 
         this.wczytaj();
-
-        //@TODO defaultowe dane do firstRun
-        /*let sprzedawca = {
-            'id': 1,
-            'imie': 'Damian',
-            'nazwisko': 'Lewita',
-            'pesel': '95081604551',
-            'haslo': 'mojehasło'
-        };
-        this.lista.push(sprzedawca);
-        this.zapisz();*/
     }
 
 

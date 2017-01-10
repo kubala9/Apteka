@@ -3,17 +3,18 @@ import formularz from '../views/_formularzKupujacy.html';
 
 class ObslugaKupujacy {
   
-  constructor($scope, $mdDialog, Kupujacy) {
+  constructor($scope, $mdDialog, Kupujacy, Notyfikacje) {
+    "ngInject";
+
     this.kupujacy = Kupujacy.pobierz();
 
-    let modyfikowanie = ($scope, $mdDialog, kupujacy) => {
+    let modyfikowanie = ($scope, Notyfikacje, kupujacy) => {
       if (typeof kupujacy !== "undefined") {
         $scope.kupujacy = Object.assign({}, kupujacy);
         $scope.kupujacy.haslo = '';
         $scope.isNew = false;
       } else {
         $scope.kupujacy = {
-          id: '',
           imie: '',
           nazwisko: '',
           pesel: '',
@@ -24,33 +25,23 @@ class ObslugaKupujacy {
         };
         $scope.isNew = true;
       }
-      
-      $scope.changed = false;
-      
-      let zapisano = kupujacy => {
-      return $mdDialog.alert()
-          .title('Klient ' + kupujacy.imie + ' ' + kupujacy.nazwisko+ ' został zapisany!')
-          .ok('Ok!');
-      };
-
-      $scope.changeValue = function() {
-        $scope.changed = true;
-      };
 
       $scope.closeDialog = () => {
-        $mdDialog.hide();
+        Notyfikacje.zamknij();
       };
 
       $scope.save = () => {
-        if ($scope.kupujacy.id !== '') {
-          Kupujacy.zapisz($scope.kupujacy);
-          $mdDialog.show(zapisano($scope.kupujacy));
+        if ($scope.kupujacy.id) {
+          Kupujacy.edytuj($scope.kupujacy);
+
+          Notyfikacje.zamknij();
+          Notyfikacje.powiadomienie('Klient została zapisany!');
         } else {
           Kupujacy.nowy($scope.kupujacy);
-          $mdDialog.show(zapisano($scope.kupujacy));
+
+          Notyfikacje.zamknij();
+          Notyfikacje.powiadomienie('Klient został dodany!');
         }
-        
-        $scope.closeDialog();
       };
     };
 
@@ -62,26 +53,20 @@ class ObslugaKupujacy {
       });
     };
 
-    let potwierdzUsuniecie = kupujacy => {
-      return $mdDialog.confirm()
-          .title('Czy napewno chcesz usunąć klienta ?')
-          .ok('Tak')
-          .cancel('Nie');
-      };
     this.usun = function usun(kupujacy) {
-      $mdDialog
-          .show(potwierdzUsuniecie(kupujacy))
+      Notyfikacje.potwierdzenie('Czy chcesz usunąć klienta?', 'Tak', 'Nie')
           .then(function() {
             Kupujacy.usun(kupujacy);
+            Notyfikacje.zamknij();
+            Notyfikacje.powiadom('Klient został usunięty!');
           }, function() {
-            $mdDialog.hide();
+            Notyfikacje.zamknij();
+            Notyfikacje.powiadom('Klient nie został usunięty!');
           });
-      this.kupujacy = Kupujacy.pobierz();
     };
     
   }
 }
-
 
 export const obslugakupujacy = {
   template: tpl,
