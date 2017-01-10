@@ -4,11 +4,15 @@ import formularz from '../views/_formularzProduktow.html';
 class ObslugaProduktow {
 
   constructor($scope, $mdDialog, Produkt, Notyfikacje) {
+    "ngInject";
+
+    this.produkty = [];
+    var timeout = null;
 
     let wczytaj = () => {
       this.produkty = Produkt.pobierz();
       $scope.$applyAsync();
-      setTimeout(wczytaj, 5000);
+      timeout = setTimeout(wczytaj, 5000);
     };
     wczytaj();
 
@@ -78,6 +82,11 @@ class ObslugaProduktow {
             Notyfikacje.zamknij();
             Notyfikacje.powiadomienie('Produkt nie został usunięty!');
           });
+    };
+
+    this.$onDestroy = function() {
+      clearTimeout(timeout);
+      timeout = null;
     };
   }
 }

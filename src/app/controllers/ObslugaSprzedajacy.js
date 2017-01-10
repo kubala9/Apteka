@@ -6,11 +6,12 @@ class ObslugaSprzedajacy {
   constructor($scope, $mdDialog, Sprzedajacy, Notyfikacje) {
 
     this.sprzedawcy = [];
+    var timeout = null;
 
     let wczytaj = () => {
       this.sprzedawcy = Sprzedajacy.pobierz();
       $scope.$applyAsync();
-      setTimeout(wczytaj, 5000);
+      timeout = setTimeout(wczytaj, 5000);
     };
     wczytaj();
 
@@ -75,6 +76,11 @@ class ObslugaSprzedajacy {
             Notyfikacje.zamknij();
             Notyfikacje.powiadomienie('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' nie został usunięty!');
           });
+    };
+
+    this.$onDestroy = function() {
+      clearTimeout(timeout);
+      timeout = null;
     };
   }
 }

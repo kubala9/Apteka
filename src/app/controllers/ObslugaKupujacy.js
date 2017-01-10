@@ -6,11 +6,12 @@ class ObslugaKupujacy {
   constructor($scope, $mdDialog, Kupujacy, Notyfikacje) {
     "ngInject";
     this.kupujacy = [];
+    var timeout = null;
 
     let wczytaj = () => {
       this.kupujacy = Kupujacy.pobierz();
       $scope.$applyAsync();
-      setTimeout(wczytaj, 5000);
+      timeout = setTimeout(wczytaj, 5000);
     };
     wczytaj();
 
@@ -70,7 +71,10 @@ class ObslugaKupujacy {
             Notyfikacje.powiadomienie('Klient nie został usunięty!');
           });
     };
-    
+
+    this.$onDestroy = function() {
+      clearTimeout(timeout);
+    };
   }
 }
 
