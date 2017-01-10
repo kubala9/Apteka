@@ -4,7 +4,14 @@ import formularz from '../views/_formularzSprzedajacy.html';
 class ObslugaSprzedajacy {
 
   constructor($scope, $mdDialog, Sprzedajacy, Notyfikacje) {
-    this.sprzedawcy = Sprzedajacy.pobierz();
+
+    this.sprzedawcy = [];
+
+    let wczytaj = () => {
+      this.sprzedawcy = Kupujacy.pobierz();
+      setTimeout(wczytaj, 5000);
+    };
+    wczytaj();
 
     //dodawanie/edytowanie pracowników
     let modyfikowanie = ($scope, $mdDialog, sprzedawca) => {

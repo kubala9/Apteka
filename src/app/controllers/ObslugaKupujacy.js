@@ -5,8 +5,13 @@ class ObslugaKupujacy {
   
   constructor($scope, $mdDialog, Kupujacy, Notyfikacje) {
     "ngInject";
+    this.kupujacy = [];
 
-    this.kupujacy = Kupujacy.pobierz();
+    let wczytaj = () => {
+      this.kupujacy = Kupujacy.pobierz();
+      setTimeout(wczytaj, 5000);
+    };
+    wczytaj();
 
     let modyfikowanie = ($scope, Notyfikacje, kupujacy) => {
       if (typeof kupujacy !== "undefined") {
