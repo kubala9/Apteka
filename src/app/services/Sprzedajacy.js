@@ -37,6 +37,7 @@ class Sprzedajacy {
     }
 
     pobierz() {
+        this.wczytaj();
         return this.lista;
     }
 

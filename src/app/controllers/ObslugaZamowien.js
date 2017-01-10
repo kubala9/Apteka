@@ -55,14 +55,14 @@ class ObslugaZamowien {
           .then(function() {
             if () {
               Notyfikacje.zamknij();
-              Notyfikacje.powiadom('Produkt ' + pozycja.produkty.nazwa + ' został usunięty!');
+              Notyfikacje.powiadomienie('Produkt ' + pozycja.produkty.nazwa + ' został usunięty!');
             } else {
               Notyfikacje.zamknij();
-              Notyfikacje.powiadom('Produkt ' + pozycja.produkty.nazwa + ' nie został usunięty!');
+              Notyfikacje.powiadomienie('Produkt ' + pozycja.produkty.nazwa + ' nie został usunięty!');
             }
           }, function() {
             Notyfikacje.zamknij();
-            Notyfikacje.powiadom('Produkt ' + pozycja.produkty.nazwa + ' nie został usunięty!');
+            Notyfikacje.powiadomienie('Produkt ' + pozycja.produkty.nazwa + ' nie został usunięty!');
           });*/
     };
     };

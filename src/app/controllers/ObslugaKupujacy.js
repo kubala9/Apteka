@@ -9,6 +9,7 @@ class ObslugaKupujacy {
 
     let wczytaj = () => {
       this.kupujacy = Kupujacy.pobierz();
+      $scope.$applyAsync();
       setTimeout(wczytaj, 5000);
     };
     wczytaj();
@@ -63,10 +64,10 @@ class ObslugaKupujacy {
           .then(function() {
             Kupujacy.usun(kupujacy);
             Notyfikacje.zamknij();
-            Notyfikacje.powiadom('Klient został usunięty!');
+            Notyfikacje.powiadomienie('Klient został usunięty!');
           }, function() {
             Notyfikacje.zamknij();
-            Notyfikacje.powiadom('Klient nie został usunięty!');
+            Notyfikacje.powiadomienie('Klient nie został usunięty!');
           });
     };
     

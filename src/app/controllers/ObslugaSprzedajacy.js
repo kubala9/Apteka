@@ -8,7 +8,8 @@ class ObslugaSprzedajacy {
     this.sprzedawcy = [];
 
     let wczytaj = () => {
-      this.sprzedawcy = Kupujacy.pobierz();
+      this.sprzedawcy = Sprzedajacy.pobierz();
+      $scope.$applyAsync();
       setTimeout(wczytaj, 5000);
     };
     wczytaj();
@@ -65,14 +66,14 @@ class ObslugaSprzedajacy {
           .then(function() {
             if (Sprzedajacy.usun(sprzedawca)) {
               Notyfikacje.zamknij();
-              Notyfikacje.powiadom('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' został usunięty!');
+              Notyfikacje.powiadomienie('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' został usunięty!');
             } else {
               Notyfikacje.zamknij();
-              Notyfikacje.powiadom('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' nie został usunięty!');
+              Notyfikacje.powiadomienie('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' nie został usunięty!');
             }
           }, function() {
             Notyfikacje.zamknij();
-            Notyfikacje.powiadom('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' nie został usunięty!');
+            Notyfikacje.powiadomienie('Sprzedawca ' + sprzedawca.imie + ' ' + sprzedawca.nazwisko + ' nie został usunięty!');
           });
     };
   }

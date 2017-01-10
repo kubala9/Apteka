@@ -65,14 +65,14 @@ class ObslugaSprzedazy {
                 .then(function() {
                     if (Sprzedaz.usun(sprzedaz)) {
                         Notyfikacje.zamknij();
-                        Notyfikacje.powiadom('Sprzedaż została usunięta!');
+                        Notyfikacje.powiadomienie('Sprzedaż została usunięta!');
                     } else {
                         Notyfikacje.zamknij();
-                        Notyfikacje.powiadom('Sprzedaż nie została usunięta!');
+                        Notyfikacje.powiadomienie('Sprzedaż nie została usunięta!');
                     }
                 }, function() {
                     Notyfikacje.zamknij();
-                    Notyfikacje.powiadom('Sprzedaż nie została usunięta!');
+                    Notyfikacje.powiadomienie('Sprzedaż nie została usunięta!');
                 });
         };
     }

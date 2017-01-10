@@ -56,6 +56,7 @@ class Kupujacy {
     }
 
     pobierz() {
+        this.wczytaj();
         return this.listakupujacych;
     }
 

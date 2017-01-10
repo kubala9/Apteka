@@ -3,26 +3,23 @@ import formularz from '../views/_formularzProduktow.html';
 
 class ObslugaProduktow {
 
-  constructor($scope, $mdDialog, Produkt) {
-    this.produkty = Produkt.pobierz();
+  constructor($scope, $mdDialog, Produkt, Notyfikacje) {
 
-    //dodawanie/edytowanie pracowników
-    let zapisano = produkt => {
-      return $mdDialog.alert()
-          .title(produkt.nazwa + ' został dodany do bazy produktów!')
-          .ok('Ok!');
+    let wczytaj = () => {
+      this.produkty = Produkt.pobierz();
+      $scope.$applyAsync();
+      setTimeout(wczytaj, 5000);
     };
-    let niezapisano = produkt => {
-      return $mdDialog.alert()
-          .title('Produkt ' + produkt.nazwa + ' NIE został dodany do bazy produktów! Sprawdź czy taki produkt nie istnieje już w bazie.')
-          .ok('Ok!');
-    };
+    wczytaj();
+
+
+    //dodawanie/edytowanie produków
     let modyfikowanie = ($scope, $mdDialog, produkt) => {
       if (typeof produkt !== "undefined") {
         $scope.produkt = Object.assign({}, produkt);
       } else {
         $scope.produkt = {
-                 nazwa: '',
+                nazwa: '',
                 opis: '', 
                 cena: '', 
                 stan: 0,
@@ -33,7 +30,7 @@ class ObslugaProduktow {
         }
 
       $scope.closeDialog = () => {
-        $mdDialog.hide();
+        Notyfikacje.zamknij();
       };
 
       $scope.save = () => {
@@ -41,15 +38,19 @@ class ObslugaProduktow {
 
         if (produkt.id) {
           if (Produkt.edytuj(produkt)) {
-            $mdDialog.show(zapisano(produkt));
+            Notyfikacje.zamknij();
+            Notyfikacje.powiadomienie(produkt.nazwa + ' został zapisany!');
           } else {
-            $mdDialog.show(niezapisano(produkt));
+            Notyfikacje.zamknij();
+            Notyfikacje.powiadomienie(produkt.nazwa + ' nie został zapisany');
           }
         } else {
           if (Produkt.nowy(produkt)) {
-            $mdDialog.show(zapisano(produkt));
+            Notyfikacje.zamknij();
+            Notyfikacje.powiadomienie(produkt.nazwa + ' został dodany!');
           } else {
-            $mdDialog.show(niezapisano(produkt));
+            Notyfikacje.zamknij();
+            Notyfikacje.powiadomienie(produkt.nazwa + ' nie został dodany!');
           }
         }
       };
@@ -57,42 +58,25 @@ class ObslugaProduktow {
     this.modyfikacja = function modyfikacja(produkt) {
       $mdDialog.show({
         template: formularz,
-        locals: {produkt}, //strzykujemy aktualnie dodawanego/edytowanego sprzedawce
+        locals: {produkt}, //strzykujemy aktualnie dodawany/edytowany produkt
         controller: modyfikowanie
       });
     };
 
-    //usuwanie pracowników
-    var usunieto = produkt => {
-      return $mdDialog.alert()
-          .title('Produkt ' + produkt.nazwa + ' został usunięty!')
-          .ok('Ok!');
-    };
-    let nieusunieto = produkt => {
-      return $mdDialog.alert()
-          .title('Produkt ' + produkt.nazwa + ' NIE został usunięty z bazy produktów!')
-          .ok('Ok!');
-    };
-    let potwierdzUsuniecie = produkt => {
-      return $mdDialog.confirm()
-          .title('Czy chcesz usunąć produkt ' + produkt.nazwa + '?')
-          .ok('Tak')
-          .cancel('Nie');
-    };
+    //usuwanie produktow
     this.usun = function usun(produkt) {
-      $mdDialog
-          .show(potwierdzUsuniecie(produkt))
+      Notyfikacje.potwierdzenie('Czy chcesz usunąć ten produkt?', 'Tak', 'Nie')
           .then(function() {
             if (Produkt.usun(produkt)) {
-              $mdDialog.hide();
-              $mdDialog.show(usunieto(produkt));
+              Notyfikacje.zamknij();
+              Notyfikacje.powiadomienie('Produkt został usunięta!');
             } else {
-              $mdDialog.hide();
-              $mdDialog.show(nieusunieto(produkt));
+              Notyfikacje.zamknij();
+              Notyfikacje.powiadomienie('Produkt nie został usunięty!');
             }
           }, function() {
-            $mdDialog.hide();
-            $mdDialog.show(nieusunieto(produkt));
+            Notyfikacje.zamknij();
+            Notyfikacje.powiadomienie('Produkt nie został usunięty!');
           });
     };
   }
