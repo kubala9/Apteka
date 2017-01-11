@@ -8,6 +8,10 @@ html, body, #root {
 
 ng-md-icon {
   display: flex;
+
+  a & {
+    display: inline-block;
+  }
 }
 
 footer {
@@ -18,3 +22,5 @@ footer {
 }
 .withButton {overflow: hidden; padding: 10px;}
 .toRight {float: right;}
+
+#sprzedaz .md-errors-spacer {display: none;}

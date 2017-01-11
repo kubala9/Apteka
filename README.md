@@ -23,3 +23,94 @@
 
 ##Tip
 * w edytorze polecam kliknąć prawym klawiszem myszy na folder .tmp, "Mark directory as", "Exclude" (IDE - PHP Storm)
+
+##Dokumentacja:
+App
+- główna klasa 'nad' wszystkimi klasami
+- firstInit()
+
+
+Notyfikacje:
+- powiadomienie()
+- potwierdzenie()
+- zamknij()
+
+ObslugaSprzedajacy:
+- Korzysta z Sprzedajacy, Notyfikacje
+- sprzedawcy[] - lista sprzedawców
+- — wczytaj() - prywatna metoda
+- — modyfikowanie() - prywatna metoda
+- modyfikacja()
+- usun()
+
+Sprzedajacy:
+- lista[] - lista sprzedawców
+- wczytaj()
+- zapisz()
+- nowy()
+- pobierz()
+- edytuj()
+- usun()
+- getSprzedawca()
+
+ObslugaKupujacy:
+- Korzysta z Kupujacy, Notyfikacje
+- kupujacy[] - lista kupujacych
+- — wczytaj() - prywatna metoda
+- — modyfikowanie() - prywatna metoda
+- modyfikacja()
+- usun()
+
+Kupujacy:
+- listakupujacych[] 
+- wczytaj()
+- zapisz()
+- nowy()
+- edytuj()
+- usun()
+- pobierz()
+- getKlient()
+
+ObsługaProdukow:
+- Korzysta z Produkt, Notyfikacje
+- produkty[] - lista produktów
+- — wczytaj() - prywatna metoda
+- — modyfikowanie() - prywatna metoda
+- modyfikacja()
+- usun()
+
+Produkt:
+- listaproduktow[]
+- wczytaj()
+- zapisz()
+- nowy()
+- pobierz()
+- edytuj()
+- usun()
+- getProdukt()
+- getCena()
+
+
+ObsługaSprzedazy:
+- Korzysta z Sprzedaz, Kupujacy, Produkt, Sprzedajacy
+- sprzedaz[]
+- kupujacy[]
+- produkty[]
+- sprzedajacy[]
+- modyfikacja()
+- usun()
+- zrealizuj()
+- getKlient()
+- filtrujZrealizowane()
+
+Sprzedaz:
+- lista[]
+- wczytaj()
+- zapisz()
+- nowy()
+- pobierz()
+- edytuj()
+- usun()
+- getPusty()
+- zrealizuj()
+

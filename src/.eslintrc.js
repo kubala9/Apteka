@@ -27,7 +27,8 @@ module.exports = {
     'space-infix-ops': 0,
     'no-lonely-if': 0,
     'key-spacing':0,
-      'comma-spacing':0
+      'comma-spacing':0,
+    'no-else-return': 0
   }
 }
 

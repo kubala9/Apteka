@@ -65,6 +65,12 @@ class Sprzedajacy {
 
         return true;
     }
+
+    getSprzedawca(id) {
+        var i = this.lista.filter(element => element.id === id)[0];
+
+        return this.lista[i];
+    }
 }
 
 export default Sprzedajacy;

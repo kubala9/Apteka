@@ -6,21 +6,60 @@
                 <h2 ng-show="sprzedaz.id">Edytuj sprzedaż nr {{ sprzedaz.id }}</h2>
             </div>
         </md-toolbar>
-{{sprzedaz}}
-        <form name="modyfikacjaSprzedazy">
+
+        <form name="modyfikacjaSprzedazy" id="sprzedaz">
             <md-content layout="column" layout-padding>
-                <div>
-                    <md-input-container>
-                        <md-checkbox ng-model="sprzedaz.recepta" aria-label="Recepta" ng-true-value="1" ng-false-value="0">
-                            Recepta
-                        </md-checkbox>
-                    </md-input-container>
-                </div>
+                <h3>Lista produktów</h3>
 
                 <div>
+                    <md-list>
+                        <md-list-item ng-repeat="produkt in sprzedaz.produkty">
+                            <md-input-container>
+                                <label>Produkt {{ $index + 1 }}</label>
+                                <md-select ng-model="produkt.object">
+                                    <md-option ng-repeat="item in produkty" ng-value="item">
+                                        {{ item.nazwa }}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>Ilość (szt.)</label>
+                                <input name="ilosc" ng-model="produkt.ilosc" type="text" required pattern="[0-9]{1,}" />
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>Cena produktu</label>
+                                <input name="cena" ng-value="getCena(produkt.object.id, false) | number: 2" type="text" disabled />
+
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>% refundacji</label>
+                                <input name="cena" ng-value="produkt.object.refundacja" type="text" disabled />
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>Wartość</label>
+                                <input name="cena" ng-value="getCena(produkt.object.id, true) * produkt.ilosc | number: 2" type="text" disabled />
+                            </md-input-container>
+
+                            <a ng-click="usunProdukt(produkt)"><ng-md-icon icon="delete" style="fill: grey;" size="15"></ng-md-icon></a>
+                        </md-list-item>
+                    </md-list>
+                    Razem: {{ sumaSzt | number: 0 }} szt. - {{ sumaZl | number: 2 }} zł
+                </div>
+
+                <a class="md-button md-warn" ng-click="dodajProdukt()">
+                    <ng-md-icon icon="add" style="fill: grey;" size="15"></ng-md-icon>
+                    Dodaj produkt
+                </a>
+
+                <h3>Dane o transakcji</h3>
+                <div>
                     <md-input-container>
-                        <label>Kupujący</label>
-                        <md-select ng-model="sprzedaz.kupujacy">
+                        <label>Klient</label>
+                        <md-select ng-model="sprzedaz.kupujacy" required>
                             <md-option ng-repeat="item in kupujacy" ng-value="item.id">
                                 {{ item.imie }} {{ item.nazwisko }}
                             </md-option>
@@ -28,32 +67,24 @@
                     </md-input-container>
                 </div>
 
-                <h2>Lista produktów</h2>
-
-                <div ng-repeat="produkt in sprzedaz.produkty">
+                <div>
                     <md-input-container>
-                        <label>Produkt {{ $index + 1 }}</label>
-                        <md-select ng-model="produkt.id">
-
-                            <md-option ng-repeat="item in produkty" ng-value="item.id">
-                                {{ item.nazwa }}
+                        <label>Sprzedawca</label>
+                        <md-select ng-model="sprzedaz.sprzedajacy" required>
+                            <md-option ng-repeat="item in sprzedajacy" ng-value="item.id">
+                                {{ item.imie }} {{ item.nazwisko }}
                             </md-option>
                         </md-select>
                     </md-input-container>
-
-                    <md-input-container>
-                        <label>Stan</label>
-                        <input name="ilosc" ng-model="produkt.ilosc" type="text" required pattern="[0-9]{1,}" />
-                        <div ng-messages="modyfikacjaSprzedazy.ilosc.$error">
-                            <div ng-message-exp="['required', 'pattern']">
-                                Wpisz całkowitą liczbę sztuk danego produktu na stanie!
-                            </div>
-                        </div>
-                    </md-input-container>
                 </div>
 
-                <a ng-click="dodajProdukt()">Dodaj produkt</a>
-
+                <div>
+                    <md-input-container>
+                        <md-checkbox ng-model="sprzedaz.zrealizowane" aria-label="Zrealizowane" ng-true-value="1" ng-false-value="0">
+                            Zrealizowane
+                        </md-checkbox>
+                    </md-input-container>
+                </div>
             </md-content>
         </form>
     </md-dialog-content>
@@ -62,7 +93,7 @@
         <md-button ng-click="closeDialog()" class="md-primary md-default-theme">
             Zamknij
         </md-button>
-        <md-button ng-click="save()" class="md-primary" ng-disabled="!modyfikacjaSprzedajacy.$valid">
+        <md-button ng-click="save()" class="md-primary" ng-disabled="!modyfikacjaSprzedazy.$valid">
             Zapisz
         </md-button>
     </md-dialog-actions>

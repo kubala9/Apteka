@@ -64,6 +64,31 @@ class Produkt {
 
         return true;
     }
+
+    getProdukt(id) {
+        var i = this.listaproduktow.findIndex((element, index, array) => element.id === id);
+        if (i === -1) {
+            return false;
+        }
+
+        return this.listaproduktow[i];
+    }
+
+    getCena(id, refundacja) {
+        var i = this.listaproduktow.findIndex((element, index, array) => element.id === id);
+        if (i === -1) {
+            return 0;
+        }
+
+        var produkt = this.listaproduktow[i];
+        var cena = produkt.cena;
+
+        if (angular.isDefined(refundacja) && refundacja) {
+            cena -= produkt.cena * (produkt.refundacja/100);
+        }
+
+        return cena;
+    }
 }
 
 export default Produkt;

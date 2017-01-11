@@ -60,6 +60,15 @@ class Kupujacy {
         return this.listakupujacych;
     }
 
+    getKlient(id) {
+        var i = this.listakupujacych.findIndex((element, index, array) => element.id === id);
+        if (i === -1) {
+            return false;
+        }
+
+        return this.listakupujacych[i];
+    }
+
 }
 
 export default Kupujacy;

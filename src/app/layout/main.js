@@ -4,10 +4,8 @@ class App {
   constructor($rootScope, Sprzedajacy, Kupujacy, Produkt, $localStorage) {
     "ngInject";
 
-    $rootScope.user = 'dami95';
-
+    this.Sprzedajacy = Sprzedajacy;
     if (!angular.isArray($localStorage.sprzedajacy)) {
-      this.Sprzedajacy = Sprzedajacy;
       this.firstInitSprzedajacy();
     }
 
@@ -20,6 +18,8 @@ class App {
       this.Produkt = Produkt;
       this.firstInitProdukt();
     }
+
+    $rootScope.zalogowany = this.Sprzedajacy.pobierz()[0];
   }
 
 
@@ -43,21 +43,21 @@ class App {
 
   firstInitKupujacy() {
     let kupujacy = {
-      imie: 'Paweł',
-      nazwisko: 'Karczewski',
+      imie: 'Jan',
+      nazwisko: 'Kowalski',
       pesel: '12345678901',
       haslo: 'pass2',
-      email: 'karczewskipawel@hotmail.com',
+      email: 'boss@sggw.pl',
       telefon: '791999468',
       adres: 'Jagodowa 3, Warszawa'
     };
 
     let kupujacy2 = {
-      imie: 'Jakub',
-      nazwisko: 'Michniewski',
+      imie: 'Agnieszka',
+      nazwisko: 'Kowalska',
       pesel: '98765432101',
       haslo: 'pass',
-      email: 'jakubek@onet.pl',
+      email: 'aga@onet.pl',
       telefon: '856476312',
       adres: 'Malinowa 8, Warszawa'
     };

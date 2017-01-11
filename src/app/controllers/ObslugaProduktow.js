@@ -73,7 +73,7 @@ class ObslugaProduktow {
           .then(function() {
             if (Produkt.usun(produkt)) {
               Notyfikacje.zamknij();
-              Notyfikacje.powiadomienie('Produkt został usunięta!');
+              Notyfikacje.powiadomienie('Produkt został usunięty!');
             } else {
               Notyfikacje.zamknij();
               Notyfikacje.powiadomienie('Produkt nie został usunięty!');

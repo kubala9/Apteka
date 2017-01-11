@@ -29,8 +29,13 @@ class Sprzedaz {
             data: null,
             sprzedajacy: null,
             kupujacy: null,
-            produkty: [],
-            recepta: null
+            produkty: [
+                {
+                    id: null,
+                    ilosc: 1
+                }
+            ],
+            zrealizowane: null
         };
     }
 
@@ -41,6 +46,7 @@ class Sprzedaz {
             sprzedaz.id = this.lista[this.lista.length - 1].id + 1;
         }
 
+        sprzedaz.data = new Date().getTime();
         this.lista.push(sprzedaz);
         this.zapisz();
 
@@ -58,6 +64,7 @@ class Sprzedaz {
             return false;
         }
 
+        sprzedaz.data = new Date().getTime();
         this.lista[i] = sprzedaz;
         this.zapisz();
 
@@ -71,6 +78,22 @@ class Sprzedaz {
         }
 
         this.lista.splice(i, 1);
+        this.zapisz();
+
+        return true;
+    }
+
+    zrealizuj(id) {
+        console.log(id);
+        console.log(this.lista);
+
+        var i = this.lista.findIndex((element, index, array) => element.id === id);
+        console.log(i);
+        if (i === -1) {
+            return false;
+        }
+
+        this.lista[i].zrealizowane = 1;
         this.zapisz();
 
         return true;

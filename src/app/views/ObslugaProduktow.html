@@ -12,10 +12,10 @@
     <hr>
 
     <md-list>
-        <md-list-item ng-repeat="produkt in $ctrl.produkty | filter:searchText | orderBy: produkt.id : true" ng-click="$ctrl.modyfikacja(produkt)">
+        <md-list-item class="md-3-line" ng-repeat="produkt in $ctrl.produkty | filter:searchText | orderBy: produkt.id : true" ng-click="$ctrl.modyfikacja(produkt)">
             <div class="md-list-item-text">
                 <h3>{{produkt.nazwa }} </h3>
-                <p>{{produkt.opis}}</p>
+                <h4>{{produkt.opis}}</h4>
  
                 <div class="md-secondary">Stan: {{produkt.stan}} szt.</div>
             </div>
