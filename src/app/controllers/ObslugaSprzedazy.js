@@ -40,8 +40,9 @@ class ObslugaSprzedazy {
                 $scope.sprzedaz.produkty.splice(i, 1);
             };
 
+
             $scope.sprzedajacy = sprzedajacy;
-            $scope.produkty = produkty;
+            $scope.produkty = produkty.filter(item => item.stan !== 0);
             $scope.kupujacy = kupujacy;
 
             $scope.closeDialog = () => {
