@@ -16,7 +16,7 @@
                         <md-list-item ng-repeat="produkt in sprzedaz.produkty">
                             <md-input-container>
                                 <label>Produkt {{ $index + 1 }}</label>
-                                <md-select ng-model="produkt.object" required="">
+                                <md-select ng-model="produkt.object" required="" ng-disabled="sprzedaz.id">
                                     <md-option ng-repeat="item in produkty" ng-value="item">
                                         {{ item.nazwa }} ({{ item.stan }} szt.)
                                     </md-option>
@@ -26,13 +26,11 @@
                             <md-input-container>
                                 <label>Ilość (szt.)</label>
                                 <input name="ilosc" ng-model="produkt.ilosc" type="number" required min="1" max="{{ sprzedaz.produkty[$index].object.stan }}" ng-disabled="sprzedaz.id" />
-
                             </md-input-container>
 
                             <md-input-container>
                                 <label>Cena produktu</label>
                                 <input name="cena" ng-value="getCena(produkt.object.id, false) | number: 2" type="text" disabled />
-
                             </md-input-container>
 
                             <md-input-container>

@@ -89,6 +89,7 @@ Produkt:
 - usun()
 - getProdukt()
 - getCena()
+- sprzedaj()
 
 
 ObsługaSprzedazy:

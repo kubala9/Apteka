@@ -87,6 +87,10 @@ class ObslugaSprzedazy {
                     }
                 } else {
                     if (Sprzedaz.nowy(sprzedaz)) {
+                        sprzedaz.produkty.forEach(produkt => {
+                            Produkt.sprzedaj(produkt.id, produkt.ilosc);
+                        });
+
                         Notyfikacje.zamknij();
                         Notyfikacje.powiadomienie('Sprzedaż została dodana!');
                     } else {

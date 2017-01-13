@@ -89,6 +89,19 @@ class Produkt {
 
         return cena;
     }
+
+    sprzedaj(id, szt) {
+        var i = this.listaproduktow.findIndex((element, index, array) => element.id === id);
+        if (i === -1) {
+            return false;
+        }
+
+        var produkt = this.listaproduktow[i];
+
+        produkt.stan -= szt;
+
+        return true;
+    }
 }
 
 export default Produkt;
