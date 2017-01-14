@@ -66,6 +66,7 @@ class Start {
           $scope.logujKupujacy.email = $scope.rejestrujKupujacy.email;
           $scope.rejestrujKupujacy = rejestrujKupujacy;
           $scope.signupKupujacy.$setPristine();
+          $scope.signupKupujacy.setUntouched();
 
           Notyfikacje.powiadomienie('Zostałeś zarejestrowany, możesz się zalogować');
         }
