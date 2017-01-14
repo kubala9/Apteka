@@ -23,6 +23,10 @@ class ObslugaSprzedazy {
                         object: Produkt.getProdukt(produkt.id)
                     };
                 });
+
+                if (!copy.sprzedajacy) {
+                    copy.sprzedajacy = $rootScope.zalogowany.id;
+                }
                 $scope.sprzedaz = copy;
             } else {
                 $scope.sprzedaz = Sprzedaz.getPusty();
@@ -39,7 +43,6 @@ class ObslugaSprzedazy {
                 }
                 $scope.sprzedaz.produkty.splice(i, 1);
             };
-
 
             $scope.sprzedajacy = sprzedajacy;
             $scope.produkty = produkty;

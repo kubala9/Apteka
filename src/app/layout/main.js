@@ -18,8 +18,6 @@ class App {
       this.Produkt = Produkt;
       this.firstInitProdukt();
     }
-
-    $rootScope.zalogowany = this.Sprzedajacy.pobierz()[0];
   }
 
 

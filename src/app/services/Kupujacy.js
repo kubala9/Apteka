@@ -28,6 +28,8 @@ class Kupujacy {
             this.listakupujacych.push(kupujacy);
 
             this.zapisz();
+
+            return true;
         };
 
         this.edytuj = function edytuj(kupujacy) {

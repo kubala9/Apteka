@@ -9,12 +9,12 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('apteka', {
       url: '/',
       component: 'apteka',
-      redirectTo: 'apteka.home'
+      redirectTo: 'apteka.start'
     })
-    .state('apteka.home', {
-        url: 'home',
-        component: 'home',
-        data: {pageTitle: 'Home'}
+    .state('apteka.start', {
+        url: 'start',
+        component: 'start',
+        data: {pageTitle: 'Start'}
     })
     .state('apteka.sprzedajacy', {
       url: 'sprzedający',

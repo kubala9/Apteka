@@ -18,7 +18,7 @@ import {footer} from './app/layout/footer';
 
 import './index.scss';
 
-import {home} from './app/controllers/Home';
+import {start} from './app/controllers/Start';
 
 import Notyfikacje from './app/services/Notyfikacje';
 
@@ -46,7 +46,7 @@ angular
 
     .service('Notyfikacje', Notyfikacje)
 
-    .component('home', home)
+    .component('start', start)
 
     .component('obslugaSprzedajacy', obslugasprzedajacy)
     .service('Sprzedajacy', Sprzedajacy)

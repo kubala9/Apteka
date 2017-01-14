@@ -28,10 +28,14 @@
 App
 - główna klasa 'nad' wszystkimi klasami
 - firstInit()
-- zalogujSprzedajacego()
-- zalogujKupujacego()
-- zarejestrujKupujacego()
 
+Start:
+- Korzysta z Sprzedajacy, Kupujacy, Notyfikacje
+- kupujacy[]
+- sprzedajacy[]
+- logujJakoSprzedajacy()
+- logujJakoKupujacy()
+- rejestrujJakoKupujacy()
 
 Notyfikacje:
 - powiadomienie()
