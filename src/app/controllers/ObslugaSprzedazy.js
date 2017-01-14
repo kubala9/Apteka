@@ -10,7 +10,7 @@ class ObslugaSprzedazy {
         this.sprzedaz = Sprzedaz.pobierz();
         this.kupujacy = Kupujacy.pobierz();
         this.sprzedajacy = Sprzedajacy.pobierz();
-        this.produkty = Produkt.pobierz();
+        this.produkty = Produkt.pobierz(true);
 
         //dodawanie/edytowanie pracowników
         let modyfikowanie = ($rootScope, $scope, sprzedaz, kupujacy, sprzedajacy, produkty) => {
@@ -42,7 +42,7 @@ class ObslugaSprzedazy {
 
 
             $scope.sprzedajacy = sprzedajacy;
-            $scope.produkty = produkty.filter(item => item.stan !== 0);
+            $scope.produkty = produkty;
             $scope.kupujacy = kupujacy;
 
             $scope.closeDialog = () => {

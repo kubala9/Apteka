@@ -4,50 +4,55 @@
                 <h2>Twój koszyk</h2>
             </div>
         </md-toolbar>
-        <md-dialog-content>               
 
-    
-             <table style="width: 90%" >
-	<tbody>
-		<tr>
-			<th  style="width: 40%;" >PRODUKT</th>
-			<th  style="width: 15%;" >CENA(1szt.)</th>
-			<th  style="width: 15%;" >ILOŚĆ</th>
-			<th  style="width: 15%;" >SUMA</th>
-		</tr>
-		    	</tbody>
-</table>  
-		<md-list>
-        <md-list-item ng-repeat="pozycja in zamowienie" ng-click="$ctrl.modyfikacja(produkt)">         
-            <div class="md-list-item-text">
-		  <table style="width: 100%;">
-	<tbody>
-		<tr>
-			<td  style="width: 300px;"><h3>{{pozycja.produkt.nazwa }} </h3>
-                </td>
-			<td style="width: 20%;">{{pozycja.produkt.cena}}</td>
-			<td style="width: 13%;">{{pozycja.ilosc }} </td>
-			<td style="width: 13%;">{{pozycja.ilosc * pozycja.produkt.cena}} </td>
-		</tr>
+        <md-dialog-content>
+            <div ng-hide="koszyk.length" style="font-weight: bold; font-size: 20px; width: 300px; padding: 20px; text-align: center;">
+                <strong>Brak produktów w koszyku!</strong>
+            </div>
 
-        
-           
-    	</tbody>
-</table>  
-            <md-button class="md-secondary md-icon-button" ng-click="usun()">
-                <ng-md-icon icon="delete" style="fill: grey;" size="30"></ng-md-icon>
-            </md-button>
-                </div>
-        </md-list-item>
-    </md-list>
+            <div ng-show="koszyk.length">
+                <md-list>
+                    <md-list-item ng-repeat="produkt in koszyk">
+                        <md-input-container>
+                            <label>Produkt {{ $index + 1 }}</label>
+                            <input name="ilosc" type="text" ng-value="produkt.object.nazwa" disabled />
+                        </md-input-container>
 
-    </md-dialog-content>
+                        <md-input-container>
+                            <label>Ilość (szt.)</label>
+                            <input name="ilosc" type="number" ng-value="produkt.ilosc" disabled />
+                        </md-input-container>
+
+                        <md-input-container>
+                            <label>Cena produktu</label>
+                            <input name="cena" ng-value="produkt.object.cena | number: 2" type="text" disabled />
+                        </md-input-container>
+
+                        <md-input-container>
+                            <label>% refundacji</label>
+                            <input name="refundacja" ng-value="produkt.object.refundacja" type="text" disabled />
+                        </md-input-container>
+
+                        <md-input-container>
+                            <label>Wartość</label>
+                            <input name="wartosc" ng-value="produkt.wartosc | number: 2" type="text" disabled />
+                        </md-input-container>
+
+                        <a ng-click="usunProdukt(produkt)"><ng-md-icon icon="delete" style="fill: grey;" size="15"></ng-md-icon></a>
+                    </md-list-item>
+                </md-list>
+                <p style="padding: 5px 20px;">
+                    Razem: {{ sumaSzt | number: 0 }} szt. - {{ sumaZl | number: 2 }} zł
+                </p>
+            </div>
+
+        </md-dialog-content>
 
     <md-dialog-actions>
         <md-button ng-click="closeDialog()" class="md-primary md-default-theme">
-            Zamknij
+            Wróć
         </md-button>
-        <md-button ng-click="#" class="md-primary">
+        <md-button ng-click="save()" class="md-primary">
             Zatwierdź i wyślij
         </md-button>
     </md-dialog-actions>

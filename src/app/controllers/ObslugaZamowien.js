@@ -1,88 +1,108 @@
+import angular from 'angular';
 import tpl from '../views/ObslugaZamowien.html';
 import formularz from '../views/_formularzZamowienie.html';
 import formularz2 from '../views/_formularzKoszyk.html';
 
 class ObslugaZamowien {
  
-  constructor($scope, $mdDialog, $mdToast, Notyfikacje, Produkt, Kupujacy, Zamowienie) {
-    this.produkty = Produkt.pobierz();
-    
-   //dodawanie/edytowanie pracowników
-   let modyfikowanie = ($scope, $mdDialog, produkt) => {
-      $scope.pozycja = {
-        produkt: '',
-        ilosc: ''
-      };
-      $scope.zamowienie = Zamowienie.pobierz();
-      console.log("nasze zamowienie", $scope.zamowienie);
-      console.log("nasz produkt", produkt);
-      $scope.pozycja.produkt = produkt;
-      $scope.l=$scope.zamowienie.length;
-      /*
-      if (typeof zamowienie !== "undefined") {
-        $scope.zamowienie = Object.assign({}, zamowienie);
-      } else {
-        $scope.zamowienie = 
-          produkt: this.produkty[1],
-            ilosc: 1
-        };
-      }*/
-       
-      $scope.closeDialog = () => {
-        $mdDialog.hide();
-      };
-      
-      $scope.save = () => { 
-          Zamowienie.dodaj($scope.pozycja);
-          $scope.closeDialog();
-          
-           /* Notyfikacje.powiadomienie('Dodano ' + pozycja.produkt.nazwa + ' do koszyka!');
-          */
-      };
-       $scope.suma = () => {
-           var suma=0;
-           for (var x=0; x<$scope.l; x++) {
-            suma+=($scope.pozycja[x].ilosc*$scope.pozycja[x].cena);
-           }
-           return suma;
-       };
-       
-       $scope.usun = () => {
-           
-           Zamowienie.usun($scope.zamowienie);
-           /*
-      Notyfikacje.potwierdzenie('Czy chcesz usunąć ten produkt z koszyka?', 'Tak', 'Nie')
-          .then(function() {
-            if () {
-              Notyfikacje.zamknij();
-              Notyfikacje.powiadomienie('Produkt ' + pozycja.produkty.nazwa + ' został usunięty!');
-            } else {
-              Notyfikacje.zamknij();
-              Notyfikacje.powiadomienie('Produkt ' + pozycja.produkty.nazwa + ' nie został usunięty!');
-            }
-          }, function() {
-            Notyfikacje.zamknij();
-            Notyfikacje.powiadomienie('Produkt ' + pozycja.produkty.nazwa + ' nie został usunięty!');
-          });*/
-    };
-    };
-    this.dodajDoKoszyka = function dodajDoKoszyka(produkt) {
-      $mdDialog.show({
-        template: formularz,
-        locals: {produkt},
-        controller: modyfikowanie
-      });
-    };
+  constructor($rootScope, $scope, $mdDialog, Notyfikacje, Produkt, Sprzedaz) {
+      var self = this;
 
-      this.pokazKoszyk = function pokazKoszyk(produkt) {
-      $mdDialog.show({
-        template: formularz2,
-        locals: {produkt},
-        controller: modyfikowanie
-      });
-    };
-     
-    
+      this.produkty = Produkt.pobierz(true);
+      this.koszyk = [];
+
+      //dodawanie rzeczy do koszyka
+      let dodawanie = ($scope, produkt, koszyk) => {
+          $scope.produkt = produkt;
+          $scope.ilosc = 1;
+
+          $scope.save = () => {
+              koszyk.push({
+                  id: produkt.id,
+                  ilosc: $scope.ilosc
+              });
+
+              Notyfikacje.zamknij();
+              Notyfikacje.powiadomienie('Produkt dodany do koszyka.');
+          };
+
+          $scope.closeDialog = () => {
+              Notyfikacje.zamknij();
+          };
+      };
+
+      let sprawdzKoszyk = ($scope, koszyk) => {
+          var copy = angular.copy(koszyk);
+          $scope.koszyk = copy.map(item => {
+              return {
+                  id: item.id,
+                  ilosc: item.ilosc,
+                  object: Produkt.getProdukt(item.id),
+                  wartosc: Produkt.getCena(item.id, true) * item.ilosc
+              };
+          });
+
+          $scope.$watch('koszyk', () => {
+              var sumaZl = 0;
+              var sumaSzt = 0;
+              $scope.koszyk.forEach(produkt => {
+                  sumaZl += produkt.wartosc;
+                    sumaSzt += parseInt(produkt.ilosc, 10);
+                });
+              $scope.sumaSzt = sumaSzt;
+              $scope.sumaZl = sumaZl;
+          }, true);
+
+          $scope.usunProdukt = produkt => {
+              var i = $scope.koszyk.indexOf(produkt);
+
+              $scope.koszyk.splice(i, 1);
+          };
+
+          $scope.save = () => {
+              var sprzedaz = Sprzedaz.getPusty();
+
+              sprzedaz.produkty = $scope.koszyk.map(item => {
+                    return {
+                        id: item.id,
+                        ilosc: item.ilosc
+                    };
+              });
+
+              sprzedaz.kupujacy = $rootScope.zalogowany.id;
+
+              if (Sprzedaz.nowy(sprzedaz)) {
+                  sprzedaz.produkty.forEach(produkt => {
+                      Produkt.sprzedaj(produkt.id, produkt.ilosc);
+                });
+
+                  Notyfikacje.zamknij();
+                  Notyfikacje.powiadomienie('Zamówienie zostało przekazane do realizacji.');
+              } else {
+                  Notyfikacje.powiadomienie('Zamówienie nie zostało przekazane do realizacji!');
+              }
+          };
+
+          $scope.closeDialog = () => {
+              Notyfikacje.zamknij();
+          };
+      };
+
+      this.dodajDoKoszyka = function dodajDoKoszyka(produkt) {
+          $mdDialog.show({
+              template: formularz,
+              locals: {produkt, koszyk: self.koszyk},
+              controller: dodawanie
+          });
+      };
+
+      this.pokazKoszyk = () => {
+          $mdDialog.show({
+              template: formularz2,
+              locals: {koszyk: self.koszyk},
+              controller: sprawdzKoszyk
+          });
+      };
   }
 }
 export const obslugazamowien = {

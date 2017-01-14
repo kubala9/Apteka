@@ -27,9 +27,8 @@ class ObslugaProduktow {
                 opis: '', 
                 cena: '', 
                 stan: 0,
-                recepta: true, 
-                refundacja: 0,
-                dostepnosc: false
+                recepta: 0,
+                refundacja: 0
             };
         }
 

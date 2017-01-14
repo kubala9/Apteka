@@ -34,9 +34,12 @@ class Produkt {
         return true;
     }
 
-    pobierz() {
+    pobierz(dostepne) {
         this.wczytaj();
 
+        if (angular.isDefined(dostepne)) {
+            return this.listaproduktow.filter(produkt => produkt.stan !== 0);
+        }
         return this.listaproduktow;
     }
 

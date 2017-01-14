@@ -28,6 +28,9 @@
 App
 - główna klasa 'nad' wszystkimi klasami
 - firstInit()
+- zalogujSprzedajacego()
+- zalogujKupujacego()
+- zarejestrujKupujacego()
 
 
 Notyfikacje:
@@ -93,7 +96,7 @@ Produkt:
 
 
 ObsługaSprzedazy:
-- Korzysta z Sprzedaz, Kupujacy, Produkt, Sprzedajacy
+- korzysta z Sprzedaz, Kupujacy, Sprzedajacy, Produkt, Notyfikacje
 - sprzedaz[]
 - kupujacy[]
 - produkty[]
@@ -103,6 +106,7 @@ ObsługaSprzedazy:
 - zrealizuj()
 - getKlient()
 - filtrujZrealizowane()
+- - modyfikowanie() - prywatna
 
 Sprzedaz:
 - lista[]
@@ -114,4 +118,19 @@ Sprzedaz:
 - usun()
 - getPusty()
 - zrealizuj()
+
+ObslugaZamowien:
+- korzysta z Notyfikacje, Produkt, Sprzedaz
+- produkty[]
+- koszyk[]
+- dodajDoKoszyka() 
+- pokazKoszyk()
+- - dodawanie() - prywatna
+- - sprawdzKoszyk() - prywatna
+
+
+Zamowienie:
+- usuwamy tą klasę!
+
+
 
