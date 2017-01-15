@@ -43,13 +43,13 @@
                                 <input name="cena" ng-value="getCena(produkt.object.id, true) * produkt.ilosc | number: 2" type="text" disabled />
                             </md-input-container>
 
-                            <a ng-click="usunProdukt(produkt)"><ng-md-icon icon="delete" style="fill: grey;" size="15"></ng-md-icon></a>
+                            <a ng-click="usunProdukt(produkt)" ng-hide="sprzedaz.id"><ng-md-icon icon="delete" style="fill: grey;" size="15"></ng-md-icon></a>
                         </md-list-item>
                     </md-list>
                     Razem: {{ sumaSzt | number: 0 }} szt. - {{ sumaZl | number: 2 }} zł
                 </div>
 
-                <a class="md-button md-warn" ng-click="dodajProdukt()">
+                <a class="md-button md-warn" ng-click="dodajProdukt()" ng-show="!sprzedaz.id">
                     <ng-md-icon icon="add" style="fill: grey;" size="15"></ng-md-icon>
                     Dodaj produkt
                 </a>
@@ -92,7 +92,7 @@
         <md-button ng-click="closeDialog()" class="md-primary md-default-theme">
             Zamknij
         </md-button>
-        <md-button ng-click="save()" class="md-primary" ng-disabled="!modyfikacjaSprzedazy.$valid">
+        <md-button ng-click="save()" class="md-primary" ng-disabled="!modyfikacjaSprzedazy.$valid && !sprzedaz.id">
             Zapisz
         </md-button>
     </md-dialog-actions>

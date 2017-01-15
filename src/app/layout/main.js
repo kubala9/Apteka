@@ -26,13 +26,13 @@ class App {
       'imie': 'Damian',
       'nazwisko': 'Lewita',
       'pesel': '95081604559',
-      'haslo': 'pass'
+      'haslo': 'password'
     };
     let sprzedawca2 = {
       'imie': 'Jakub',
       'nazwisko': 'Michniewski',
       'pesel': '95081604550',
-      'haslo': 'pass2'
+      'haslo': 'password2'
     };
 
     this.Sprzedajacy.nowy(sprzedawca);

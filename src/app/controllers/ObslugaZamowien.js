@@ -56,6 +56,7 @@ class ObslugaZamowien {
           $scope.usunProdukt = produkt => {
               var i = $scope.koszyk.indexOf(produkt);
 
+              koszyk.splice(i, 1);
               $scope.koszyk.splice(i, 1);
           };
 
@@ -74,10 +75,14 @@ class ObslugaZamowien {
               if (Sprzedaz.nowy(sprzedaz)) {
                   sprzedaz.produkty.forEach(produkt => {
                       Produkt.sprzedaj(produkt.id, produkt.ilosc);
-                });
+                    });
+
+                  koszyk = [];
+                  $scope.koszyk = [];
 
                   Notyfikacje.zamknij();
                   Notyfikacje.powiadomienie('Zamówienie zostało przekazane do realizacji.');
+
               } else {
                   Notyfikacje.powiadomienie('Zamówienie nie zostało przekazane do realizacji!');
               }

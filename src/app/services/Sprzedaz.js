@@ -54,6 +54,8 @@ class Sprzedaz {
     }
 
     pobierz() {
+        this.wczytaj();
+
         return this.lista;
     }
 
@@ -84,9 +86,6 @@ class Sprzedaz {
     }
 
     zrealizuj(id) {
-        console.log(id);
-        console.log(this.lista);
-
         var i = this.lista.findIndex((element, index, array) => element.id === id);
         console.log(i);
         if (i === -1) {

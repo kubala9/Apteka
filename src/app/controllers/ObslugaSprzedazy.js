@@ -6,8 +6,16 @@ class ObslugaSprzedazy {
 
     constructor($rootScope, $scope, $mdDialog, Sprzedaz, Kupujacy, Sprzedajacy, Produkt, Notyfikacje) {
         var ctrl = this;
+        this.sprzedaz = [];
 
-        this.sprzedaz = Sprzedaz.pobierz();
+        var timeout = null;
+        let wczytaj = () => {
+            this.sprzedaz = Sprzedaz.pobierz();
+            $scope.$applyAsync();
+            timeout = setTimeout(wczytaj, 5000);
+        };
+        wczytaj();
+
         this.kupujacy = Kupujacy.pobierz();
         this.sprzedajacy = Sprzedajacy.pobierz();
         this.produkty = Produkt.pobierz(true);
@@ -153,6 +161,11 @@ class ObslugaSprzedazy {
                 return item.zrealizowane !== 1;
             }
             return item;
+        };
+
+        this.$onDestroy = function() {
+            clearTimeout(timeout);
+            timeout = null;
         };
     }
 }
