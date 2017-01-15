@@ -60,5 +60,14 @@ angular
     .component('obslugaZamowien', obslugazamowien)
 
     .component('obslugaSprzedazy', obslugasprzedazy)
-    .service('Sprzedaz', Sprzedaz);
+    .service('Sprzedaz', Sprzedaz)
 
+    .run(($transitions, $rootScope, $state) => {
+        $transitions.onStart({ }, function(trans) {
+            $rootScope.currentNavItem = trans.$to().name;
+        });
+
+        if (!$rootScope.zalogowany) {
+            $state.go('apteka.start');
+        }
+    });

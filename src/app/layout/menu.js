@@ -3,7 +3,9 @@ export const menu = {
   controller: ($rootScope, $scope, $state) => {
     "ngInject";
 
-    $scope.currentNavItem = $state.current.name;
+    $rootScope.$watch('currentNavItem', () => {
+      $scope.currentNavItem = $rootScope.currentNavItem;
+    }, true);
 
     $rootScope.$watch('zalogowany', () => {
       $scope.user = $rootScope.zalogowany;
